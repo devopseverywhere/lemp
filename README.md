@@ -228,3 +228,18 @@ And reload if no errors encountered:
 ```bash
 sudo service nginx reload
 ```
+
+## Install SSL
+Install Certbot:
+```bash
+sudo snap install certbot --classic
+```
+
+And attempt to get an SSL certificate by providing the needed information:
+```bash
+sudo certbot
+```
+
+You should see your domains to select. Select the domains by providing their (comma-separated) position number. If SSL can't be issued, wait for the DNS to propagate. Be sure that you paused any CDN proxies like CloudFlare otherwise domain ownership validation will fail.
+
+Once SSL is provisioned, visit your domain in the browser and complete WordPress installation by providing the database name and password that you created above. By following the same steps, you can add as many websites as you want.
