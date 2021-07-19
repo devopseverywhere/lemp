@@ -4,6 +4,7 @@ Instructions to setup Linux, NGINX, MySQL, and PHP on an Ubuntu server to host m
 Here are some of the points to remember:
 
 - We will use a VM with Ubuntu 20.x on a provider like DigitalOcean, Linode, Upcloud, Google Cloud, AWS or any other cloud provider
+- The VM should not contain any installations of PHP, MySQL, NGINX or any other web server stack software
 - You will be able to run multiple WordPress (or general) websites on a single instance
 - We will use certbot package to use SSL certificates from Let's Encrypt
 - We will create a new SSH user with sudo privileges
