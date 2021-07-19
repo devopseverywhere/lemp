@@ -15,10 +15,11 @@ Here are some of the points to remember:
 ## Sign in
 Using a terminal on Unix or PowerShell (or PuTTY) on Windows, sign in as root or a standard user with sudo privileges.
 
-## Update Package Cache
+## Update System Software
 
 ```bash
-sudo apt update
+sudo apt update && \
+sudo apt install zip
 ```
 
 ### Create SSH User
@@ -26,6 +27,12 @@ We will create an SSH user with sudo privileges and we will use this user to man
 
 ```bash
 sudo adduser devopseverywhere
+```
+
+And create directory to create websites:
+```bash
+sudo mkdir /home/devopseverywhere/sites && \
+sudo chown -R devopseverywhere:devopseverywhere /home/devopseverywhere
 ```
 
 Assign sudo privileges:
@@ -137,7 +144,7 @@ sudo install php-fpm
 
 Installed some common and required PHP extensions:
 ```bash
-sudo apt install php-curl php-dom php-exif php-fileinfo php-imagick php-json php-mbstring php-mysqli php-xml php-zip php-bcmath php-gd php-iconv php-intl php-ssh2 php-ftp php-sockets
+sudo apt php-common php-curl php-imagick php-json php-mbstring php-mysql php-xml php-zip php-bcmath php-gd php-intl php-ssh2
 ```
 
 Configure PHP-FPM pools to use our created SSH user:
@@ -158,33 +165,40 @@ And finally restart PHP-FPM service:
 sudo service php7.4-fpm restart
 ```
 
+## Create First Site
+Become our created SSH user:
+```bash
+sudo su devopseverywhere && \
+cd /home/devopseverywhere/sites
+```
+Create website directory:
+```bash
+mkdir first && \
+echo '<?php phpinfo();?>' > first/info.php
+```
 
-## Required PHP Extensions
-Here is a list of required PHP extensions that WordPress needs in order to run properly.
+Create MySQL user & database. Be sure to use a secure password and store the database name and the password as we will be needing this when setting up our website.
+```bash
+sudo mysql -e "CREATE USER 'firstuser'@'localhost' IDENTIFIED BY 'MySecurePassword135';"
+sudo mysql -e "CREATE DATABASE firstdatabase;"
+sudo mysql -e "GRANT ALL PRIVILEGES ON firstdatabase.* TO 'firstuser'@'localhost';"
+sudo mysql -e "FLUSH PRIVILEGES;"
+```
 
-- curl
-- dom
-- exif
-- fileinfo
-- hash
-- imagick
-- json
-- mbstring
-- mysqli
-- openssl
-- pcre
-- sodium
-- xml
-- zip
-- bcmath
-- filter
-- gd
-- iconv
-- intl
-- mcrypt
-- simplexml
-- xmlreader
-- zlib
-- ssh2
-- ftp
-- sockets
+Download WordPress & unzip the code:
+```bash
+cd /home/devopseverywhere/sites/first && \
+wget https://wordpress.org/latest.zip && \
+unzip latest.zip && \
+cd wordpress && \
+mv * ../ && \
+cd .. && \
+rm -rf wordpress latest.zip
+```
+
+Create a virtual host:
+```bash
+cd /etc/nginx/vhosts.d && \
+
+```
+
