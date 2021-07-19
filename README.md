@@ -30,14 +30,14 @@ sudo adduser devopseverywhere
 
 Assign sudo privileges:
 ```bash
-sudo echo 'devopseverywhere ALL=(ALL) NOPASSWD:AL' >> /etc/sudoers
+sudo echo 'devopseverywhere ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 ```
 
 ## Install & Configure NGINX
 First of all, install and configure NGINX web server. We will install NGINX, will replace the existing NGINX config with an optimized one and we will modify the directory structure a little to simplify the vhost file creation.
 
 ```bash
-sudo apt install nginx
+sudo apt -y install nginx
 ```
 
 Update NGINX config with an optimized configuration file. The optimized configuration file for NGINX has been included in the source.
@@ -104,7 +104,31 @@ http {
 EOF
 ```
 
-Check the NGINX configuration files and restart NGINX if no errors encountered.
+Check the NGINX configuration files:
+
+```bash
+sudo nginx -t
+```
+
+And restart NGINX if no errors encountered:
+```bash
+sudo service nginx restart
+```
+
+## Install & Optimize & Secure MySQL
+Install MySQL server
+```bash
+sudo apt install mysql-server
+```
+To improve performance, disable general logging:
+```bash
+sudo mysql -e "SET GLOBAL general_log = 'OFF';"
+```
+And finally secure your MySQL installation:
+```bash
+sudo mysql_secure_installation
+```
+
 
 ## Required PHP Extensions
 Here is a list of required PHP extensions that WordPress needs in order to run properly.
