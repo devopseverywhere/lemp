@@ -4,7 +4,7 @@ Instructions to setup Linux, NGINX, MySQL, and PHP on an Ubuntu server to host m
 Here are some of the points to remember:
 
 - We will use a VM with Ubuntu 20.x on a provider like DigitalOcean, Linode, Upcloud, Google Cloud, AWS or any other cloud provider
-- The VM should not contain any installations of PHP, MySQL, NGINX or any other web server stack software
+- The VM should not contain any existing installations of PHP, MySQL, NGINX or any other web server stack software
 - You will be able to run multiple WordPress (or general) websites on a single instance
 - We will use certbot package to use SSL certificates from Let's Encrypt
 - We will create a new SSH user with sudo privileges
@@ -19,6 +19,18 @@ Using a terminal on Unix or PowerShell (or PuTTY) on Windows, sign in as root or
 
 ```bash
 sudo apt update
+```
+
+### Create SSH User
+We will create an SSH user with sudo privileges and we will use this user to manage websites as well as we will run PHP and web server (NGINX) under this user.
+
+```bash
+sudo adduser devopseverywhere
+```
+
+Assign sudo privileges:
+```bash
+sudo echo 'devopseverywhere ALL=(ALL) NOPASSWD:AL' >> /etc/sudoers
 ```
 
 ## Install & Configure NGINX
@@ -92,6 +104,7 @@ http {
 EOF
 ```
 
+Check the NGINX configuration files and restart NGINX if no errors encountered.
 
 ## Required PHP Extensions
 Here is a list of required PHP extensions that WordPress needs in order to run properly.
