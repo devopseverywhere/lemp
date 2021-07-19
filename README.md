@@ -1,5 +1,5 @@
 # LEMP Setup for WordPress on Ubuntu
-Instructions to setup Linux, NGINX, MySQL, and PHP on an Ubuntu server to host multiple WordPress websites. Throughout this example, we are using an SSH user named `devopseverywhere` in our NGINX file as well as in PHP-FPM configuration. You will have to adjust it to match the SSH user that you create on your server.
+Instructions to setup Linux, NGINX, MySQL, and PHP on an Ubuntu server to host multiple WordPress websites. Throughout this guide, we are using an SSH user named `devopseverywhere` in our NGINX file as well as in PHP-FPM configuration. You will have to adjust it to match the SSH user that you create on your server.
 
 Here are some of the points to remember:
 
