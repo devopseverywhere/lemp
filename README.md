@@ -20,6 +20,8 @@ sudo apt install nginx
 Update NGINX config with an optimized configuration file. The optimized configuration file for NGINX has been included in the source.
 ```bash
 cd /etc/nginx && \
+rm -rf sites-enabled sites-available && \
+mkdir vhosts.d && \
 sudo mv nginx.conf nginx-bak && \
 cat > nginx.conf <<- EOF
 user devopseverywhere;
