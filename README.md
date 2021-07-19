@@ -116,7 +116,7 @@ sudo service nginx restart
 ```
 
 ## Install, Optimize & Secure MySQL
-Install MySQL server
+Install MySQL server:
 ```bash
 sudo apt install mysql-server
 ```
@@ -134,7 +134,13 @@ Install PHP-FPM:
 ```bash
 sudo install php-fpm
 ```
-And configure PHP-FPM pools to use our created SSH user:
+
+Installed some common and required PHP extensions:
+```bash
+sudo apt install php-curl php-dom php-exif php-fileinfo php-imagick php-json php-mbstring php-mysqli php-xml php-zip php-bcmath php-gd php-iconv php-intl php-ssh2 php-ftp php-sockets
+```
+
+Configure PHP-FPM pools to use our created SSH user:
 
 ```bash
 sudo sed -i 's#www-data#devopseverywhere#g' /etc/php/7.4/fpm/pool.d/www.conf
