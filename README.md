@@ -106,7 +106,7 @@ http {
     keepalive_requests 100;
     include /etc/nginx/mime.types;
     include /etc/nginx/conf.d/*.conf;
-    include /etc/nginx/vhosts.d/*;
+    include /etc/nginx/vhosts.d/*.conf;
 }
 EOF
 ```
@@ -196,9 +196,35 @@ cd .. && \
 rm -rf wordpress latest.zip
 ```
 
-Create a virtual host:
+Create a virtual host. Be sure to use your actual domain names in place of `example.com` and also point the DNS of your domains to your server IP:
 ```bash
 cd /etc/nginx/vhosts.d && \
+sudo cat > first.conf <<- EOF
+server {
+    listen 80;
+    server_name example.com www.example.com;
+    root /home/devopseverywhere/first;
+    index index.php index.html;
 
+    location / {
+         try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass unix:/var/run/php/php-fpm.sock;
+        fastcgi_index index.php;
+    }
+}
+EOF
 ```
 
+Check NGINX config:
+```bash
+sudo nginx -t
+```
+
+And reload if no errors encountered:
+```bash
+sudo service nginx reload
+```
