@@ -115,7 +115,7 @@ And restart NGINX if no errors encountered:
 sudo service nginx restart
 ```
 
-## Install & Optimize & Secure MySQL
+## Install, Optimize & Secure MySQL
 Install MySQL server
 ```bash
 sudo apt install mysql-server
@@ -127,6 +127,29 @@ sudo mysql -e "SET GLOBAL general_log = 'OFF';"
 And finally secure your MySQL installation:
 ```bash
 sudo mysql_secure_installation
+```
+
+## Install & Configure PHP
+Install PHP-FPM:
+```bash
+sudo install php-fpm
+```
+And configure PHP-FPM pools to use our created SSH user:
+
+```bash
+sudo sed -i 's#www-data#devopseverywhere#g' /etc/php/7.4/fpm/pool.d/www.conf
+```
+
+Note: Be sure to specify the correct PHP version. You can list the directory contents to see the installed PHP version:
+```bash
+cd /etc/php && \
+ls
+```
+
+And finally restart PHP-FPM service:
+
+```bash
+sudo service php7.4-fpm restart
 ```
 
 
