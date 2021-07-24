@@ -144,7 +144,7 @@ sudo apt install php-fpm
 
 Installed some common and required PHP extensions:
 ```bash
-sudo apt php-common php-curl php-imagick php-json php-mbstring php-mysql php-xml php-zip php-bcmath php-gd php-intl php-ssh2
+sudo apt install php-common php-curl php-imagick php-json php-mbstring php-mysql php-xml php-zip php-bcmath php-gd php-intl php-ssh2
 ```
 
 Configure PHP-FPM pools to use our created SSH user:
