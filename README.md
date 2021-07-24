@@ -139,7 +139,7 @@ sudo mysql_secure_installation
 ## Install & Configure PHP
 Install PHP-FPM:
 ```bash
-sudo install php-fpm
+sudo apt install php-fpm
 ```
 
 Installed some common and required PHP extensions:
